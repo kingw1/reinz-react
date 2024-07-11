@@ -6,11 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class AuthController extends Controller
 {
     public function login()
     {
+        Inertia::setRootView('auth');
+
         return inertia('Admin/Login');
     }
 
@@ -28,7 +31,7 @@ class AuthController extends Controller
         }
 
         return back()->with([
-            'auth-error' => 'The provided credentials do not match our records.',
+            'message' => 'The provided credentials do not match our records.',
         ]);
     }
 
