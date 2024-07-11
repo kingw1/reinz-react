@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55.81 55.81">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #969696;
+      }
+
+      .cls-1, .cls-2 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="_レイヤー_1" data-name="レイヤー 1">
+    <g id="X_Twitter_" data-name="X (Twitter)">
+      <circle id="circle" class="cls-1" cx="27.91" cy="27.91" r="27.91"/>
+      <path id="twitter_logo" data-name="twitter logo" class="cls-2" d="m46.23,45.26h-10.77l-10.14-13.61-12.68,13.61h-3.05l14.38-15.41L9.58,10.55h10.58l9.73,12.95,12.09-12.95h2.97l-13.72,14.74,15,19.97Zm-9.46-2.43h4.94L19.24,12.83h-5.06l22.59,30Z"/>
+    </g>
+  </g>
+</svg>
