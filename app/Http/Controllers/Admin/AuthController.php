@@ -14,7 +14,7 @@ class AuthController extends Controller
     {
         Inertia::setRootView('auth');
 
-        return inertia('Admin/Login');
+        return Inertia::render('Admin/Login');
     }
 
     public function authenticate(Request $request): RedirectResponse
