@@ -16,6 +16,12 @@ return Application::configure(basePath: dirname(__DIR__))
             \App\Http\Middleware\HandleInertiaRequests::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
+
+        $middleware->redirectGuestsTo(function (Request $request) {
+            return $request->segment(1) == 'admin'
+                ? route('admin.login')
+                : route('login');
+        });
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
