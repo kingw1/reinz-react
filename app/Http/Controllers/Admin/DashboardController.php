@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
     public function __invoke()
     {
-        return inertia('Admin/Dashboard');
+        Inertia::setRootView('admin');
+
+        return Inertia::render('Admin/Dashboard');
     }
 }

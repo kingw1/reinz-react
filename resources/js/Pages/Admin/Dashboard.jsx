@@ -1,5 +1,13 @@
+import AdminLayout from "@/Layouts/AdminLayout";
+import { Head } from "@inertiajs/react";
 import React from "react";
 
 export default function Dashboard() {
-    return <div>Dashboard</div>;
+    return (
+        <AdminLayout>
+            <Head title="Admin Panel" />
+
+            <div>Dashboard</div>
+        </AdminLayout>
+    );
 }
