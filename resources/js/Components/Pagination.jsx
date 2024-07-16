@@ -1,7 +1,9 @@
 import { Link } from "@inertiajs/react";
 import React from "react";
 
-export default function Pagination({ paginator }) {
+export default function Pagination({ source }) {
+    const paginator = source.meta;
+
     return (
         <nav className="d-flex justify-items-center justify-content-between">
             <div className="d-none flex-sm-fill d-sm-flex align-items-sm-center justify-content-sm-between">
