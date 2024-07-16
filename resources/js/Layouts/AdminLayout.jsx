@@ -3,7 +3,7 @@ import Header from "./Admin/Header";
 import Sidebar from "./Admin/Sidebar";
 import { usePage } from "@inertiajs/react";
 
-export default function AdminLayout({ children }) {
+export default function AdminLayout({ headline, action, children }) {
     const user = usePage().props.auth.user;
 
     return (
@@ -33,9 +33,9 @@ export default function AdminLayout({ children }) {
                                     className="app-container container-xxl d-flex justify-content-between"
                                 >
                                     <h1 className="page-heading text-dark fw-bold fs-3 my-0">
-                                        headline
+                                        {headline}
                                     </h1>
-                                    <div>action</div>
+                                    <div>{action}</div>
                                 </div>
                             </div>
                             <div
