@@ -1,13 +1,13 @@
 import AdminLayout from "@/Layouts/AdminLayout";
-import { Head } from "@inertiajs/react";
+import { Head, usePage } from "@inertiajs/react";
 import React from "react";
 
 export default function Dashboard() {
-    return (
-        <AdminLayout>
-            <Head title="Admin Panel" />
+    const user = usePage().props.auth.user;
 
-            <div>Dashboard</div>
+    return (
+        <AdminLayout headline={"Welcome, " + user.name}>
+            <Head title="Admin Panel" />
         </AdminLayout>
     );
 }
