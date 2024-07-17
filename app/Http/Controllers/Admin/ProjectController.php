@@ -13,8 +13,6 @@ class ProjectController extends Controller
 
     public function __construct()
     {
-        Inertia::setRootView('admin');
-
         $this->projectRepo = new ProjectRepository;
     }
 

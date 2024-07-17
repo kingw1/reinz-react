@@ -9,8 +9,6 @@ class DashboardController extends Controller
 {
     public function __invoke()
     {
-        Inertia::setRootView('admin');
-
         return Inertia::render('Admin/Dashboard');
     }
 }

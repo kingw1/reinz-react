@@ -12,8 +12,6 @@ class AuthController extends Controller
 {
     public function login()
     {
-        Inertia::setRootView('auth');
-
         return Inertia::render('Admin/Login');
     }
 
