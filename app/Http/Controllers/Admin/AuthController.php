@@ -17,7 +17,7 @@ class AuthController extends Controller
         return Inertia::render('Admin/Login');
     }
 
-    public function authenticate(Request $request): RedirectResponse
+    public function authenticate(Request $request)
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -27,7 +27,7 @@ class AuthController extends Controller
         if (Auth::guard('web')->attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended(route('admin.dashboard'));
+            return Inertia::location(route('admin.dashboard'));
         }
 
         return back()->with([
