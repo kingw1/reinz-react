@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -23,7 +24,7 @@ class Developer extends Model
         $this->local = app()->getLocale();
         parent::__construct($attributes);
     }
-    
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
@@ -57,6 +58,6 @@ class Developer extends Model
     {
         $field = empty($lang) ? 'name' : 'name_' . $this->local;
 
-        return self::get()->pluck($field, 'id')->toArray();
+        return self::select('id', DB::raw("$field as label"))->get()->toArray();
     }
 }

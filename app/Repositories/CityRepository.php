@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\City;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 
 class CityRepository
 {
@@ -17,7 +18,7 @@ class CityRepository
     {
         $field = empty($lang) ? 'name' : 'name_' . $lang;
 
-        return City::get()->pluck($field, 'id')->toArray();
+        return City::select('id', DB::raw("$field as label"))->get()->toArray();
     }
 
     public function getDefaultCity(): City

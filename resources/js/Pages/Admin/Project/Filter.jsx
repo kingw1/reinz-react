@@ -1,6 +1,15 @@
+import Select from "@/Components/Select";
 import React from "react";
 
-export default function Filter() {
+export default function Filter({
+    selectProjectTypes,
+    selectDevelopers,
+    selectCities,
+    selectDistricts,
+    selectAreas,
+    filterData,
+    filters,
+}) {
     return (
         <>
             <div className="d-flex align-items-center position-relative my-1 me-5">
@@ -13,33 +22,52 @@ export default function Filter() {
                         type="text"
                         className="form-control form-control-solid w-250px ps-13"
                         placeholder="Search Project"
+                        onChange={(e) => filterData("search", e.target.value)}
+                        defaultValue={filters.search}
                     />
                 </div>
             </div>
             <div className="d-flex align-items-center position-relative my-1 me-5">
-                <select className="form-select form-select-solid">
-                    <option value="">Select Project Type</option>
-                </select>
+                <Select
+                    options={selectProjectTypes}
+                    onChange={(e) =>
+                        filterData("project_type_id", e.target.value)
+                    }
+                    selectedOption={filters.project_type_id}
+                    defaultOption="Select Project Type"
+                />
             </div>
             <div className="d-flex align-items-center position-relative my-1 me-5">
-                <select className="form-select form-select-solid">
-                    <option value="">Select Developer</option>
-                </select>
+                <Select
+                    options={selectDevelopers}
+                    onChange={(e) => filterData("developer_id", e.target.value)}
+                    selectedOption={filters.developer_id}
+                    defaultOption="Select Developer"
+                />
             </div>
             <div className="d-flex align-items-center position-relative my-1 me-5">
-                <select className="form-select form-select-solid">
-                    <option value="">Select City</option>
-                </select>
+                <Select
+                    options={selectCities}
+                    onChange={(e) => filterData("city_id", e.target.value)}
+                    selectedOption={filters.city_id}
+                    defaultOption="Select City"
+                />
             </div>
             <div className="d-flex align-items-center position-relative my-1 me-5">
-                <select className="form-select form-select-solid">
-                    <option value="">Select District</option>
-                </select>
+                <Select
+                    options={selectDistricts}
+                    onChange={(e) => filterData("district_id", e.target.value)}
+                    selectedOption={filters.district_id}
+                    defaultOption="Select District"
+                />
             </div>
             <div className="d-flex align-items-center position-relative my-1 me-5">
-                <select className="form-select form-select-solid">
-                    <option value="">Select Area</option>
-                </select>
+                <Select
+                    options={selectAreas}
+                    onChange={(e) => filterData("area_id", e.target.value)}
+                    selectedOption={filters.area_id}
+                    defaultOption="Select Area"
+                />
             </div>
         </>
     );

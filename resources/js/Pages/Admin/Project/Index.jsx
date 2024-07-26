@@ -3,12 +3,33 @@ import DeleteButton from "@/Components/DeleteButton";
 import EditButton from "@/Components/EditButton";
 import Pagination from "@/Components/Pagination";
 import AdminLayout from "@/Layouts/AdminLayout";
-import { Head, usePage } from "@inertiajs/react";
+import { Head, usePage, router } from "@inertiajs/react";
 import React from "react";
 import Filter from "./Filter";
 
-export default function Index({ projects }) {
+export default function Index({
+    projects,
+    selectProjectTypes,
+    selectDevelopers,
+    selectCities,
+    selectDistricts,
+    selectAreas,
+    filters,
+}) {
     const permissions = usePage().props.auth.permissions;
+    console.log(filters);
+    function filterData(field, value) {
+        filters[field] = value;
+
+        router.get(
+            "/admin/projects",
+            { filters },
+            {
+                replace: true,
+                preserveState: true,
+            }
+        );
+    }
 
     function createProject() {
         window.location.href = "/admin/projects/create";
@@ -28,7 +49,15 @@ export default function Index({ projects }) {
             <div className="card card-flush">
                 <div className="card-header mt-6">
                     <div className="card-title">
-                        <Filter />
+                        <Filter
+                            selectProjectTypes={selectProjectTypes}
+                            selectDevelopers={selectDevelopers}
+                            selectCities={selectCities}
+                            selectDistricts={selectDistricts}
+                            selectAreas={selectAreas}
+                            filterData={filterData}
+                            filters={filters}
+                        />
                     </div>
                 </div>
                 <div className="card-body pt-0">
@@ -53,45 +82,57 @@ export default function Index({ projects }) {
                             </tr>
                         </thead>
                         <tbody className="fw-semibold text-gray-600">
-                            {projects.data.map((project) => {
-                                return (
-                                    <tr key={project.id}>
-                                        <td>{project.name_en}</td>
-                                        <td>{project.name_kh}</td>
-                                        <td>{project.project_type}</td>
-                                        <td>{project.developer}</td>
-                                        <td>{project.status}</td>
-                                        <td>{project.created_at}</td>
+                            {projects.data.length ? (
+                                projects.data.map((project) => {
+                                    return (
+                                        <tr key={project.id}>
+                                            <td>{project.name_en}</td>
+                                            <td>{project.name_kh}</td>
+                                            <td>{project.project_type}</td>
+                                            <td>{project.developer}</td>
+                                            <td>{project.status}</td>
+                                            <td>{project.created_at}</td>
 
-                                        {permissions.includes(
-                                            "projects-edit"
-                                        ) ||
-                                        permissions.includes(
-                                            "projects-delete"
-                                        ) ? (
-                                            <td className="text-end">
-                                                {permissions.includes(
-                                                    "projects-edit"
-                                                ) && (
-                                                    <EditButton
-                                                        href={`/admin/projects/${project.id}/edit`}
-                                                    />
-                                                )}
+                                            {permissions.includes(
+                                                "projects-edit"
+                                            ) ||
+                                            permissions.includes(
+                                                "projects-delete"
+                                            ) ? (
+                                                <td className="text-end">
+                                                    {permissions.includes(
+                                                        "projects-edit"
+                                                    ) && (
+                                                        <EditButton
+                                                            href={`/admin/projects/${project.id}/edit`}
+                                                        />
+                                                    )}
 
-                                                {permissions.includes(
-                                                    "projects-delete"
-                                                ) && (
-                                                    <DeleteButton
-                                                        onClick={deleteProject}
-                                                    />
-                                                )}
-                                            </td>
-                                        ) : (
-                                            ""
-                                        )}
-                                    </tr>
-                                );
-                            })}
+                                                    {permissions.includes(
+                                                        "projects-delete"
+                                                    ) && (
+                                                        <DeleteButton
+                                                            onClick={
+                                                                deleteProject
+                                                            }
+                                                        />
+                                                    )}
+                                                </td>
+                                            ) : (
+                                                ""
+                                            )}
+                                        </tr>
+                                    );
+                                })
+                            ) : (
+                                <tr>
+                                    <td colSpan="7">
+                                        <div className="text-center">
+                                            No data found
+                                        </div>
+                                    </td>
+                                </tr>
+                            )}
                         </tbody>
                     </table>
                     <Pagination source={projects} />

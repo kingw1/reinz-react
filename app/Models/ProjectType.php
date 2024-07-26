@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class ProjectType extends Model
 {
@@ -37,6 +38,6 @@ class ProjectType extends Model
     {
         $field = empty($lang) ? 'name' : 'name_' . $lang;
 
-        return self::get()->pluck($field, 'id')->toArray();
+        return self::select('id', DB::raw("$field as label"))->get()->toArray();
     }
 }
